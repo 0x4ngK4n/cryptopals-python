@@ -1,0 +1,34 @@
+def shit_scoring(a):
+	#named so 'cuz IMO its actually shit, need to devise a better statistical model rather than just plain character comparison
+	flag = True
+	for i in range(0,len(a)):
+		if ((ord(a[i]) == 32) or (ord(a[i]) >= 65 and ord(a[i]) <= 90) or (ord(a[i]) >= 97 and ord(a[i]) <= 122) or (ord(a[i]) == 39) or (ord(a[i]) == 34) or (ord(a[i]) == 10)):
+			flag = True
+		else:
+			#print('failing character: ' + str(ord(a[i])))
+			flag = False
+			break
+	if flag == True:
+		print('string: ' + a + 'flag: ' + str(flag))
+
+def xor_decrypter(c):
+	#variable 'c' is a single line we read from the file
+	d = []
+	for i in range(1,256):
+		x = list(chr(i).encode('utf-8'))
+		for j in range(0,len(c)):
+			d.append(x[0]^c[j])
+		try:
+			e = bytes(d).decode('utf-8')			
+			shit_scoring(e)
+		except:
+			pass
+		d = []
+	
+if __name__ == "__main__":
+	with open('encrypted-text.txt','r') as g:
+		for line in g.readlines():
+			line = line.strip('\r\n')
+			b = bytes.fromhex(line)
+			c = list(b)
+			xor_decrypter(c)
