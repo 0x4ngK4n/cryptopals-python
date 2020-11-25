@@ -1,0 +1,24 @@
+a = list('this is a test'.encode('utf-8'))
+b = list('wokka wokka!!!'.encode('utf-8'))
+
+
+bits_array = []
+bits_array2 = []
+for i in a:
+	i = "{0:b}".format(i).zfill(8)
+	bits_array.append(i)
+	
+for j in b:
+	j = "{0:b}".format(j).zfill(8)
+	bits_array2.append(j)
+
+print(bits_array)
+print(bits_array2)
+
+h = 0 #h is the hamming distance
+for i in range(0,len(bits_array)):
+	for j in range(0,len(bits_array[i])):
+		if bits_array[i][j] != bits_array2[i][j]:
+			h = h+1
+
+print(h)
