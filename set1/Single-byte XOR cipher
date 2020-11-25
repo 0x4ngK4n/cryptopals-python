@@ -1,0 +1,30 @@
+a = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+
+b = bytes.fromhex(a)
+c = list(b)
+
+d = []
+
+
+def shit_scoring(a):
+	#named so 'cuz IMO its actually shit, need to devise a better statistical model rather than just plain character comparison
+	flag = True
+	for i in range(0,len(a)):
+		if ((ord(a[i]) == 32) or (ord(a[i]) >= 65 and ord(a[i]) <= 90) or (ord(a[i]) >= 97 and ord(a[i]) <= 122) or (ord(a[i]) == 39)):
+			flag = True
+		else:
+			flag = False
+			break
+	if flag == True:
+		print('string: ' + a)
+
+for i in range(1,256):
+	x = list(chr(i).encode('utf-8'))
+	for j in range(0,len(c)):
+		d.append(x[0]^c[j])
+	try:
+		e = bytes(d).decode('utf-8')
+		shit_scoring(e)
+	except:
+		pass
+	d = []
