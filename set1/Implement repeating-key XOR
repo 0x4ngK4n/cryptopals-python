@@ -1,0 +1,42 @@
+import sys,random
+
+plaintext = "Burning 'em, if you ain't quick and nimble\r\nI go crazy when I hear a cymbal"
+key = 'ICE'
+i = 0
+
+
+def xor_chars(c,k):
+	e = []
+	c = list(c.encode('utf-8'))
+	k = list(k.encode('utf-8'))
+	for i in range(0,len(c)):
+		e.append(c[i]^k[i])
+		return(e)
+	#print(bytes(e).decode('utf-8'))
+
+def encrypted_text(e):
+	encrypted_text = ''
+	for k in e:
+		encrypted_text = encrypted_text + str(k)
+	with open(encrypted_filename,'a') as g:
+		g.write(encrypted_text)
+	#print(encrypted_text)
+		
+	
+if __name__ == "__main__":
+	if len(sys.argv) != 2:
+		print("here")
+		print('Usage:'+ sys.argv[0] + ' <file_to_encrypt>')
+		sys.exit()
+	filename = sys.argv[1]
+	encrypted_filename = filename.split('.')[0] + '_' + str(random.randint(1,99999)) + ".sig"
+	e = []
+	with open(filename,'r') as f:
+		for plaintext in f.readlines():
+			for characters in plaintext:
+				j = xor_chars(characters,key[i%3])
+				j = bytes(j)
+				e.append(j.hex())
+				i = i + 1
+		encrypted_text(e)
+	print('Encrypted file: ' + str(encrypted_filename))
