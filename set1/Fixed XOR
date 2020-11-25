@@ -1,0 +1,10 @@
+a = list(bytes.fromhex('1c0111001f010100061a024b53535009181c'))
+b = list(bytes.fromhex('686974207468652062756c6c277320657965'))
+z = []
+
+for i in range(0,len(a[i])):
+	z.append(a[i]^b[i])
+
+z = bytes(z)
+z = bytes.hex(z)
+print(z)
